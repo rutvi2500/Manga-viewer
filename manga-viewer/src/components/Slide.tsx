@@ -1,41 +1,41 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeActiveBook, changeActivePage, getChapterDetails } from "../actions";
+import { AppDispatch } from "../store";
+import { chapterDetails, state } from "../types";
 
-const Slide = ({ chapterDetails }) => {
+const Slide = ({ chapterDetails }: {chapterDetails: chapterDetails}) => {
   const { activePage, chapterLoading, activeBook, bookDetails } = useSelector(
-    (state) => state.bookListReducer
+    (state: state) => state.bookListReducer
   );
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const nextPage = () => {
-    console.log(chapterDetails.pages.slice(-1).pop().id)
-    if(activePage.id === chapterDetails.pages.slice(-1).pop().id) {
-      if(chapterDetails.id === activeBook.chapter_ids.at(-1)) {
+    if(activePage.id === chapterDetails?.pages?.slice(-1)?.pop()?.id) {
+      if(chapterDetails?.id === activeBook.chapter_ids.at(-1)) {
         if(activeBook?.id === 3) {
           dispatch(changeActiveBook(bookDetails[0]))
         } else {
           dispatch(changeActiveBook(bookDetails[activeBook.id]))
         }
       } else {
-        dispatch(getChapterDetails(chapterDetails.id +1))
+        dispatch(getChapterDetails(chapterDetails?.id +1))
       }
     } else {
-      dispatch(changeActivePage(chapterDetails.pages?.[activePage.page_index +1]))
+      dispatch(changeActivePage(chapterDetails?.pages?.[activePage.page_index +1]))
     }
   }
   const previousPage = () => {
-    console.log('>>>>> previous',chapterDetails.pages[0].id)
-    if(activePage.id === chapterDetails.pages[0].id) {
-      if(chapterDetails.id === activeBook?.chapter_ids[0]) {
+    if(activePage.id === chapterDetails?.pages[0].id) {
+      if(chapterDetails?.id === activeBook?.chapter_ids[0]) {
         if(activeBook?.id === 1) {
           dispatch(changeActiveBook(bookDetails[2]))
         } else {
           dispatch(changeActiveBook(bookDetails[activeBook.id -2]))
         }
       } else {
-        dispatch(getChapterDetails(chapterDetails.id -1))
+        dispatch(getChapterDetails(chapterDetails?.id -1))
       }    } else {
-      dispatch(changeActivePage(chapterDetails.pages?.[activePage.page_index -1]))
+      dispatch(changeActivePage(chapterDetails?.pages?.[activePage?.page_index -1]))
     }
   }
   const leftDiv = {
@@ -56,7 +56,7 @@ const Slide = ({ chapterDetails }) => {
             <img
               src={activePage?.image?.file}
               alt={activePage?.image?.file}
-              style={{ width: "30%" }}
+              style={{ height: "30%" }}
             />
             <div>
               {activePage?.page_index + 1}/{chapterDetails?.pages?.length}

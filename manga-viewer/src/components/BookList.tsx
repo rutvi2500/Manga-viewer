@@ -1,20 +1,21 @@
 import React from "react";
 import { useEffect } from "react";
-import { changeActiveBook, requestBooks } from "../actions";
+import { changeActiveBook, requestBooks } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import '../types'
+import { bookDetails, state } from "../types";
 
-const BookList = ({ bookDetails, activeBook }) => {
-  const { error, isLoading } = useSelector((state) => state.bookListReducer);
+const BookList = ({ bookDetails, activeBook }: {bookDetails: any, activeBook: bookDetails}) => {
+  const { error, isLoading } = useSelector((state: state) => state.bookListReducer);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(requestBooks());
   }, [dispatch]);
-  console.log(activeBook?.chapter_ids?.[0])
   let displayBookList;
   if (bookDetails.length === 0) {
     displayBookList = <h2>Sorry, there's no book available!</h2>;
   } else {
-    displayBookList = bookDetails.map((book) => {
+    displayBookList = bookDetails.map((book: bookDetails) => {
       const { id, title } = book;
       return (
         <li style={{ display: "inline" }} key={id}>
@@ -29,7 +30,7 @@ const BookList = ({ bookDetails, activeBook }) => {
   }
   return (
     <>
-      <h2>Manga Viewer</h2>
+      {/* <h2>Manga Viewer</h2> */}
       {isLoading ? (
         <h2>Loading...</h2>
       ) : error ? (

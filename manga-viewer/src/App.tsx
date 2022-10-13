@@ -3,11 +3,11 @@ import BookList from "./components/BookList";
 import ChapterList from "./components/ChapterList";
 import Slide from "./components/Slide";
 import './App.css';
+import {state } from "./types";
+import React from "react";
 
 function App() {
-  const bookDetails = useSelector(state => state.bookListReducer.bookDetails)
-  const activeBook = useSelector(state => state.bookListReducer.activeBook)
-  const chapterDetails = useSelector(state => state.bookListReducer.chapterDetails)
+  const {bookDetails, activeBook, chapterDetails} = useSelector((state: state) => state.bookListReducer)
   return (
     <>
       <BookList bookDetails={bookDetails} activeBook={activeBook}/>

@@ -1,4 +1,6 @@
-const initialData = {
+import { state } from "../types";
+
+const initialData: state = {
   bookDetails: [],
   isLoading: false,
   error: "",
@@ -7,7 +9,7 @@ const initialData = {
   activePage: [],
   chapterLoading: false,
 };
-const bookListReducer = (state = initialData, action) => {
+const bookListReducer = (state = initialData, action: any) => {
   switch (action.type) {
     case "FETCH_BOOKS_REQUEST":
       return {

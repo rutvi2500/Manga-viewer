@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const fetchBooksRequest = () => {
   return {
     type: 'FETCH_BOOKS_REQUEST',
@@ -9,46 +10,46 @@ export const fetchChapterRequest = () => {
     type: 'FETCH_CHAPTER_REQUEST',
   }
 }
-export const fetchBooksSuccess = (books) => {
+export const fetchBooksSuccess = (books: any) => {
   return {
     type: 'FETCH_BOOKS_SUCCESS',
     payload: books
   }
 }
-export const fetchChapterSuccess = (chapterDetail) => {
+export const fetchChapterSuccess = (chapterDetail: any) => {
   return {
     type: 'FETCH_CHAPTER_SUCCESS',
     payload: chapterDetail
   }
 }
-export const fetchBooksFailure = (error) => {
+export const fetchBooksFailure = (error: Error) => {
   return {
     type: 'FETCH_BOOKS_FAILURE',
     payload: error
   }
 }
-export const fetchChapterFailure = (error) => {
+export const fetchChapterFailure = (error: Error) => {
   return {
     type: 'FETCH_CHAPTER_FAILURE',
     payload: error
   }
 }
-export const changeActiveBook = (id) => {
+export const changeActiveBook = (id : number) => {
   return {
     type: 'CHANGE_ACTIVE_BOOK',
     payload: id
   }
 }
-export const changeActivePage = (page) => {
+export const changeActivePage = (page: number) => {
   return {
     type: 'CHANGE_ACTIVE_PAGE',
     payload: page
   }
 }
-export const getChapterDetails = (id) => {
-  console.log('>>>>chapppppppppppppp',id)
+export const getChapterDetails = (id: number) => {
+  console.log('>>>>chap',id)
   const url = `http://18.177.140.79:8080/chapters/${id}/`;
-  return (dispatch) => {
+  return (dispatch: any) => {
     dispatch(fetchChapterRequest());
     const { CancelToken } = axios;
     const source = CancelToken.source();
@@ -68,9 +69,9 @@ export const getChapterDetails = (id) => {
       });
   }
 }
-export const requestBooks = () => {
+export const requestBooks: any = () => {
   const url = `http://18.177.140.79:8080/books/`;
-  return (dispatch) => {
+  return (dispatch: any) => {
     dispatch(fetchBooksRequest());
     const { CancelToken } = axios;
     const source = CancelToken.source();
